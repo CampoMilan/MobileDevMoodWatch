@@ -1,5 +1,6 @@
 package com.campomilan.moodwatch;
 
+import android.content.Intent;
 import android.graphics.Movie;
 import android.os.Bundle;
 
@@ -62,14 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //tijdelijke oplossing om naar andere activities te navigeren
+        switch (item.getItemId()){
+            case R.id.action_moods:
+                Intent intent = new Intent(MainActivity.this, SelectionActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                // Do nothing
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
