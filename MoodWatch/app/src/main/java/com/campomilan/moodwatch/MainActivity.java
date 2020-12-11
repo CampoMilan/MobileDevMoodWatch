@@ -37,14 +37,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int movieListSize = mMovieList.size();
-                mMovieList.addLast("+ Movie" + movieListSize);
-                mRecyclerView.getAdapter().notifyItemInserted(movieListSize);
-                mRecyclerView.smoothScrollToPosition(movieListSize);
+                if (movieListSize != 0) {
+                    mMovieList.addLast("+ Movie" + movieListSize);
+                    mRecyclerView.getAdapter().notifyItemInserted(movieListSize);
+                    mRecyclerView.smoothScrollToPosition(movieListSize);
+                }
             }
         });
 
         //Test films toevoegen
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++) {
             mMovieList.addLast("Movie" + i);
         }
 
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //tijdelijke oplossing om naar andere activities te navigeren
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_moods:
                 Intent intent = new Intent(MainActivity.this, SelectionActivity.class);
                 startActivity(intent);

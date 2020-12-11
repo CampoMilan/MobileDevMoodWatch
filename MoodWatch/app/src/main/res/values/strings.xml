@@ -4,7 +4,8 @@
     <string name="action_moods">Moods</string>
     <string name="action_order">Order</string>
     <string name="label_moods">Mood Selection</string>
-    <string name="SelectText">Select A Mood</string>
+    <string name="select_moods">Select A Mood</string>
+    <string name="select_genres">Select Genres for *insert mood in SelectionActivity*</string>
     <string-array name="mood_array">
         <item>Happy</item>
         <item>Sad</item>
@@ -13,4 +14,13 @@
         <item>Sleepy</item>
         <item>Thirst for Knowledge</item>
     </string-array>
+
+    <string name="genre_action">Action</string>
+    <string name="genre_comedy">Comedy</string>
+    <string name="genre_drama">Drama</string>
+    <string name="genre_horror">Horror</string>
+    <string name="genre_adventure">Adventure</string>
+    <string name="genre_thriller">Thriller</string>
+    <string name="genre_romance">Romance</string>
+    <string name="btn_submitSelection">Submit Genres to Mood</string>
 </resources>

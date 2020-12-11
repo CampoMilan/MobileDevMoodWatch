@@ -23,18 +23,109 @@
         android:id="@+id/spinner_mood"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Text_SelectMood" />
+        app:layout_constraintTop_toBottomOf="@+id/Text_SelectMood"
+        />
 
     <TextView
         android:id="@+id/Text_SelectMood"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
-        android:text="@string/SelectText"
+        android:text="@string/select_moods"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SelectionTitle" />
+
+    <TextView
+        android:id="@+id/Text_SelectGenres"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/select_genres"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_mood" />
+
+    <CheckBox
+        android:id="@+id/chk_action"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Text_SelectGenres" />
+
+    <CheckBox
+        android:id="@+id/chk_adventure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_adventure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chk_action" />
+
+    <CheckBox
+        android:id="@+id/chk_comedy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_comedy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chk_adventure" />
+
+    <CheckBox
+        android:id="@+id/chk_drama"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_drama"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chk_comedy" />
+
+    <CheckBox
+    android:id="@+id/chk_horror"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="@string/genre_horror"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/chk_drama" />
+
+    <CheckBox
+        android:id="@+id/chk_romance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_romance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chk_horror" />
+
+    <CheckBox
+        android:id="@+id/chk_thriller"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_thriller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chk_romance" />
+
+    <Button
+        android:id="@+id/Submit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_submitSelection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="SubmitGenreSelection"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
