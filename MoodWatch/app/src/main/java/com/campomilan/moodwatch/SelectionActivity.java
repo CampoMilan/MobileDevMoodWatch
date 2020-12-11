@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    String[] moods = getResources().getStringArray(R.array.mood_array);
+    String[] moods;
     String selectedMood= "*select a mood first*!";
     TextView mSelectGenreTextView;
 
@@ -22,7 +22,8 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
-        mSelectGenreTextView = findViewById(R.id.Text_SelectGenres);
+        mSelectGenreTextView = (TextView)findViewById(R.id.Text_SelectGenres);
+        moods = getResources().getStringArray(R.array.mood_array);
 
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
         Spinner spinner = findViewById(R.id.spinner_mood);
@@ -39,6 +40,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         selectedMood = adapterView.getItemAtPosition(position).toString();
+        mSelectGenreTextView.append(selectedMood);
 
     }
 
