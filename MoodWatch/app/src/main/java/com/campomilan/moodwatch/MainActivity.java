@@ -33,6 +33,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    //This link is for testing purposes only!!!
     private static String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=250ae9a3b22b8c7bdcc469913a866ce8&language=en-US&page=1";
 
     List<APIModelMovie> mMovieList;
