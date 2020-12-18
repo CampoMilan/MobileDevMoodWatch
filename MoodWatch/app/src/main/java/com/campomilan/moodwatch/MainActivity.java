@@ -2,6 +2,7 @@ package com.campomilan.moodwatch;
 
 import android.content.Intent;
 import android.graphics.Movie;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,13 +18,25 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final LinkedList<String> mMovieList = new LinkedList<>();
-    private RecyclerView mRecyclerView;
-    private MovieListAdapter mAdapter;
+    private static String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=250ae9a3b22b8c7bdcc469913a866ce8&language=en-US&page=1";
+
+    List<APIModelMovie> mMovieList;
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,28 +45,89 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int movieListSize = mMovieList.size();
-                if (movieListSize != 0) {
-                    mMovieList.addLast("+ Movie" + movieListSize);
-                    mRecyclerView.getAdapter().notifyItemInserted(movieListSize);
-                    mRecyclerView.smoothScrollToPosition(movieListSize);
-                }
-            }
-        });
+        mMovieList = new ArrayList<>();
+        mRecyclerView = findViewById(R.id.recyclerView);
 
-        //Test films toevoegen
-        for (int i = 0; i < 20; i++) {
-            mMovieList.addLast("Movie" + i);
+        GetData getData = new GetData();
+        getData.execute();
+    }
+
+    public class GetData extends AsyncTask<String, String, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String current = "";
+
+            try {
+                URL url;
+                HttpURLConnection urlConnection = null;
+
+                try {
+                    url = new URL(JSON_URL);
+                    urlConnection = (HttpURLConnection) url.openConnection();
+
+                    InputStream is = urlConnection.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+
+                    int data = isr.read();
+                    while (data != -1) {
+                        current += (char) data;
+                        data = isr.read();
+                    }
+                    return current;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (urlConnection != null) {
+                        urlConnection.disconnect();
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return current;
         }
 
-        mRecyclerView = findViewById(R.id.recyclerview);
-        mAdapter = new MovieListAdapter(this, mMovieList);
-        mRecyclerView.setAdapter(mAdapter);
+        @Override
+        protected void onPostExecute(String s) {
+            try {
+                // parse the JSON Object from the datastream string
+                JSONObject jsonObject = new JSONObject(s);
+
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                for (int i = 0; i< jsonArray.length(); i++){
+
+                    JSONObject movie = jsonArray.getJSONObject(i);
+
+                    APIModelMovie model = new APIModelMovie();
+                    model.setId(movie.getString("id"));
+                    model.setTitle(movie.getString("original_title"));
+                    model.setImgURL(movie.getString("poster_path"));
+
+                    mMovieList.add(model);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            PutDataIntoRecyclerView(mMovieList);
+
+        }
+
+    }
+
+    private void PutDataIntoRecyclerView(List<APIModelMovie> movieList){
+
+        MovieListAdapter adapterMovie = new MovieListAdapter(this, movieList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mRecyclerView.setAdapter(adapterMovie);
+
     }
 
     @Override

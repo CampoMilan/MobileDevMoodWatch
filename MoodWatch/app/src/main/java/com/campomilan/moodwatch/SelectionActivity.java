@@ -39,15 +39,13 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        selectedMood = adapterView.getItemAtPosition(position).toString();
-        String selectGenresText = findViewById(R.id.Text_SelectGenres).toString() + " " + selectedMood;
+        selectedMood = (String)adapterView.getItemAtPosition(position);
+        String selectGenresText = getResources().getString(R.string.select_genres) + " " + selectedMood;
         mSelectGenreTextView.setText(selectGenresText);
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     public void SubmitGenreSelection(View view) {

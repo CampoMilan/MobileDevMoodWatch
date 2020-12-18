@@ -1,63 +1,72 @@
 package com.campomilan.moodwatch;
 
 import android.content.Context;
-import android.graphics.Movie;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.LinkedList;
+import java.util.List;
 
-public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
-    protected final LinkedList<String> mMovieList;
-    private LayoutInflater mInflater;
+public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
 
-    public MovieListAdapter(Context context, LinkedList<String> movieList){
-        mInflater = LayoutInflater.from(context);
-        this.mMovieList = movieList;
+    private Context mContext;
+    private List<APIModelMovie> mData;
+
+    public MovieListAdapter(Context context, List<APIModelMovie> mData){
+        this.mData = mData;
+        this.mContext = context;
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mMovieView = mInflater.inflate(R.layout.movielist_item, parent, false);
-        return new MovieViewHolder(mMovieView, this);
+        View v;
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        v = inflater.inflate(R.layout.movie_item, parent, false);
+
+        return new MovieViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        String mCurrent = mMovieList.get(position);
-        holder.movieItemView.setText(mCurrent);
+        //id and title bind
+        holder.id.setText(mData.get(position).getId());
+        holder.title.setText(mData.get(position).getTitle());
+
+        //img bind
+        Glide.with(mContext)
+                .load(mData.get(position).getImgURL())
+                .into(holder.img);
     }
 
     @Override
     public int getItemCount() {
-        return mMovieList.size();
+        return mData.size();
+    }
+
+    public static class MovieViewHolder extends RecyclerView.ViewHolder{
+
+        TextView id;
+        TextView title;
+        ImageView img;
+
+        public MovieViewHolder(@NonNull View itemView) {
+            super(itemView);
+            id = itemView.findViewById(R.id.id_txt);
+            title = itemView.findViewById(R.id.title_txt);
+            img = itemView.findViewById(R.id.imageView);
+        }
+
     }
 }
 
-class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    public final TextView movieItemView;
-    final MovieListAdapter mAdapter;
 
-    public MovieViewHolder(@NonNull View itemView, MovieListAdapter mAdapter) {
-        super(itemView);
-        movieItemView = itemView.findViewById(R.id.movie);
-        this.mAdapter = mAdapter;
-        itemView.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        int mPosition = getLayoutPosition();
-        String element = mAdapter.mMovieList.get(mPosition);
-
-        mAdapter.mMovieList.set(mPosition, "Clicked!" + element);
-
-        mAdapter.notifyDataSetChanged();
-    }
-}
