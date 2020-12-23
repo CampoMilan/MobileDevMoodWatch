@@ -50,5 +50,6 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
 
     public void SubmitGenreSelection(View view) {
         //TODO: genres linken aan geselecteerde mood
+        // voorstel 1: classe mood met nodige naam een array waarin we moods kunnen opslaan
     }
 }
