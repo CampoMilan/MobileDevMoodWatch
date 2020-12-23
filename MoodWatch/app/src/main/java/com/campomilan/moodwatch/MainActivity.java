@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject movie = jsonArray.getJSONObject(i);
 
                     APIModelMovie model = new APIModelMovie();
-                    model.setId(movie.getString("id"));
+                    model.setId(movie.getString("genre_ids"));
                     model.setTitle(movie.getString("original_title"));
                     model.setImgURL(movie.getString("poster_path"));
 
