@@ -69,28 +69,25 @@ public class MainActivity extends AppCompatActivity {
 
         for (APIModelMovie e: mMovieList)     // de lijst met films doorlopen
         {
-            for (int i=0; i < e.genreID.length;i++) // het genre ID van de film doorlopen
+            for (int i=0; i < e.genreID.size();i++) // het genre ID van de film doorlopen
             {
                 for(int j=0; j < mood.MoodID.length;j++) //het genre ID van de Mood doorlopan
                 {
-                       if (e.genreID[i] == mood.MoodID[j]) // het genre ID en de Mood ID vergelijken
+                       if (e.genreID.get(i) == mood.MoodID[j]) // het genre ID en de Mood ID vergelijken
                        {
                            model.setGenreID(e.getGenreID());
                            model.setId(e.getId());
                            model.setImgURL(e.getImgURL());
-                           model.setTitle(e.getTitle());//toevoegen aan een nieuwe MovieList  HULP VRAGEN BIJ MILAN
+                           model.setTitle(e.getTitle());
 
                            NewmMovieList.add(model);
                        }
-                               // verwijderen van deze film uit de lijst?
                 }
             }
         }
 
         PutDataIntoRecyclerView(NewmMovieList);
         /*
-        mMovieList = NewmMovieList;
-        PutDataIntoRecyclerView(mMovieList);
         De nieuwe lijst printen.
         */
     }
@@ -162,7 +159,8 @@ public class MainActivity extends AppCompatActivity {
                     model.setId(movie.getString("id"));
                     model.setTitle(movie.getString("original_title"));
                     model.setImgURL(movie.getString("poster_path"));
-                    model.setGenreIDFromJSON(movie.getString("genre_ids"));
+
+                    model.setGenreIDFromJSON(movie.getJSONArray("genre_ids"));
 
                     mMovieList.add(model);
                 }

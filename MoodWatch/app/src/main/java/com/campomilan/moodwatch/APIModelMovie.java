@@ -3,15 +3,18 @@ package com.campomilan.moodwatch;
 import android.util.JsonReader;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class APIModelMovie {
     String id;
     String title;
     String imgURL;
-    int[] genreID;
+    ArrayList<Integer> genreID;
 
-    public APIModelMovie(String id, String title, String imgURL, int[] genreID){
+    public APIModelMovie(String id, String title, String imgURL, ArrayList<Integer> genreID){
         this.id = id;
         this.title = title;
         this.imgURL = imgURL;
@@ -47,22 +50,27 @@ public class APIModelMovie {
         this.imgURL = this.imgURL + imgURL;
     }
 
-    public  int[] getGenreID(){return  genreID;}
-    public void setGenreID(int[] ID)
+    public  ArrayList<Integer> getGenreID(){return  genreID;}
+    public void setGenreID(ArrayList<Integer> ID)
     {
         this.genreID = ID;
     }
-    public void setGenreIDFromJSON(String IDString)
-    {
+    public void setGenreIDFromJSON(JSONArray jsonArray) {
+
         // In deze functie gaan we de Array genre id die we via de API hebben verkregen en in een String hebben moeten opslaan terug (proberen) om te zetten naar een int[]
         // inkomende string [12,4,10751,16] Regex = "\d+"
-        String[] Regexholder;
-        Regexholder = IDString.split("\\d+");
-        int[] holder = new int[Regexholder.length];
-        for (int i = 0; i < Regexholder.length;i++)
+
+        ArrayList<Integer> Holder = new ArrayList<>();
+        try
         {
-            holder[i] = Integer.parseInt(Regexholder[i]);
+            for (int i = 0; i < jsonArray.length(); i++)
+                {
+                Holder.add(Integer.parseInt(jsonArray.getString(i)));
+                }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        this.genreID = holder;
+
+        this.genreID = Holder;
     }
 }
