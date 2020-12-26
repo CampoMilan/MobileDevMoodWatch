@@ -22,13 +22,13 @@
 
     <include
         layout="@layout/content_main"
-        android:layout_width="192dp"
-        android:layout_height="203dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="216dp"
-        android:layout_height="106dp"
+        android:layout_width="match_parent"
+        android:layout_height="169dp"
         android:onClick="FilterHappy_btnClick"
         android:text="@string/btn_Happy" />
 
