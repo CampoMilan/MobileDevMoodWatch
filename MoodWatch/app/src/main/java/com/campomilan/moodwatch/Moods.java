@@ -18,9 +18,23 @@ public class Moods {
     public int[] getMoodID(){return MoodID;}
 
     //Hiervoor gaan we gebruik moeten maken van de secondActivity
-    public int[] setMoodID(int NewMoodID){
+    public int[] setMoodID(int NewMoodID)
+    {
+        int[] MoodIDHolder = new int[this.MoodID.length+1];
+        for(int i=0;i < this.MoodID.length; i++)
+        {
+            if (this.MoodID[i] == NewMoodID)
+            {
+                return this.MoodID;
+            }
+        }
 
-        return MoodID; // gaat waarschijnlijk moeten uitbreiden
+        for(int i=0;i < this.MoodID.length; i++)
+        {
+            MoodIDHolder[i] = this.MoodID[i];
+        }
+            MoodIDHolder[this.MoodID.length+1] = NewMoodID;
+            return MoodIDHolder; // gaat waarschijnlijk moeten uitbreiden. want het is een beetje omslachtig.
     }
 }
 /*
