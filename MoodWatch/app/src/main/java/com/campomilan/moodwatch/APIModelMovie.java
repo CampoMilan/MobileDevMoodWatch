@@ -48,11 +48,17 @@ public class APIModelMovie {
     }
 
     public  int[] getGenreID(){return  genreID;}
-    public void setGenreID(String genreIDString)
+    public void setGenreID(String IDString)
     {
         // In deze functie gaan we de Array genre id die we via de API hebben verkregen en in een String hebben moeten opslaan terug (proberen) om te zetten naar een int[]
-        // inkomende string [12,4,10751,16]
-
-
+        // inkomende string [12,4,10751,16] Regex = "\d+"
+        String[] Regexholder;
+        Regexholder = IDString.split("\\d+");
+        int[] holder = new int[Regexholder.length];
+        for (int i = 0; i < Regexholder.length;i++)
+        {
+            holder[i] = Integer.parseInt(Regexholder[i]);
+        }
+        this.genreID = holder;
     }
 }
