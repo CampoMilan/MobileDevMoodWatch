@@ -23,4 +23,5 @@
     <string name="genre_thriller">Thriller</string>
     <string name="genre_romance">Romance</string>
     <string name="btn_submitSelection">Submit Genres to Mood</string>
+    <string name="filter_for_Happy">Filter Happy</string>
 </resources>

@@ -1,23 +1,26 @@
-package com.campomilan.moodwatch;
+    package com.campomilan.moodwatch;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Moods {
     String Name;
-    Integer[] MoodID;
+    int[] MoodID;
 
 
-    public Moods(String Name,Integer[] MoodID)
+    public Moods(String Name,int[] MoodID)
     {
         this.Name = Name;
         this.MoodID = MoodID;
     }
 
     public String getName(){return Name;}
-    public Integer[] getMoodID(){return MoodID;}
+    public int[] getMoodID(){return MoodID;}
 
     //Hiervoor gaan we gebruik moeten maken van de secondActivity
-    public Integer[] setMoodID(/*Interger[] NEWMoodID;*/){
-       //this.MoodID = NEWMoodID;
-        return MoodID; //tijdelijk of kan ook void zijn als ik mij niet vergis
+    public int[] setMoodID(int NewMoodID){
+
+        return MoodID; // gaat waarschijnlijk moeten uitbreiden
     }
 }
 /*
