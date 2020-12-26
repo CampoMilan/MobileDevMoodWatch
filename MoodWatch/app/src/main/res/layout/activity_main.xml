@@ -22,6 +22,14 @@
 
     <include
         layout="@layout/content_main"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="169dp"
+        android:onClick="FilterHappy_btnClick"
+        android:text="@string/btn_Happy" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

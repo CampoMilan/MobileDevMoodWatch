@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.JsonReader;
 import android.view.View;
 
 import android.view.Menu;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Element;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     List<APIModelMovie> mMovieList;
     RecyclerView mRecyclerView;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,52 @@ public class MainActivity extends AppCompatActivity {
 
         GetData getData = new GetData();
         getData.execute();
+    }
+
+
+    //Algemene poging om data te filteren oafhankelijk van de knop waarop is gedrukt.
+    //lijst meegeven met de alle films in en ook een mood megeven
+
+    public void filtermovies(List<APIModelMovie> mMovieList, Moods mood) {
+        List<APIModelMovie> NewmMovieList;
+        NewmMovieList = new ArrayList<>();
+        APIModelMovie model = new APIModelMovie();
+
+        for (APIModelMovie e: mMovieList)     // de lijst met films doorlopen
+        {
+            for (int i=0; i < e.genreID.size();i++) // het genre ID van de film doorlopen
+            {
+                for(int j=0; j < mood.MoodID.length;j++) //het genre ID van de Mood doorlopan
+                {
+                       if (e.genreID.get(i) == mood.MoodID[j]) // het genre ID en de Mood ID vergelijken
+                       {
+                           model.setGenreID(e.getGenreID());
+                           model.setId(e.getId());
+                           model.setImgURL(e.getImgURL());
+                           model.setTitle(e.getTitle());
+
+                           NewmMovieList.add(model);
+                       }
+                }
+            }
+        }
+
+        PutDataIntoRecyclerView(NewmMovieList);
+        /*
+        De nieuwe lijst printen.
+        */
+    }
+
+    // filteren op Mood/genre
+    public void FilterHappy(List<APIModelMovie> mMovielist) {
+        int[] x = {28};
+        Moods Action = new Moods("Action",x);
+        filtermovies(mMovieList,Action);
+    }
+    //btn_click
+    public void FilterHappy_btnClick(View view) {
+        FilterHappy(mMovieList);
+        //om een of andere reden moet dees wat het zou eens allemaal mooi samen kunne
     }
 
     public class GetData extends AsyncTask<String, String, String>{
@@ -108,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                     model.setId(movie.getString("id"));
                     model.setTitle(movie.getString("original_title"));
                     model.setImgURL(movie.getString("poster_path"));
+
+                    model.setGenreIDFromJSON(movie.getJSONArray("genre_ids"));
 
                     mMovieList.add(model);
                 }
