@@ -31,7 +31,12 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     String selectedMood = "*select a mood first*!";
     TextView mSelectGenreTextView;
 
-
+// TODO:
+    // 1 status checkbox overlopen.
+    // 2 Schrijven naar file
+    // 3 verschillende files
+    // 4 file selectere en uitlezen.
+    // 5 data omzetten en een filter request doen.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         moods = getResources().getStringArray(R.array.mood_array);
 
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
-        Spinner spinner = findViewById(R.id.spinner_mood);
+        Spinner spinner  = findViewById(R.id.spinner_mood);
         spinner.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the moods list
