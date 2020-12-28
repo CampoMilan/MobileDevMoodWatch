@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     // filteren op Mood/genre
     public void FilterHappy(List<APIModelMovie> mMovielist) {
-        String FILE_NAME = "MOODS_HAPPY";
+        String FILE_NAME = "happy.txt";
         int[] x = GetMoodIDs(FILE_NAME);
         Moods HAPPY = new Moods("HAPPY",x);
         filtermovies(mMovieList, HAPPY);
