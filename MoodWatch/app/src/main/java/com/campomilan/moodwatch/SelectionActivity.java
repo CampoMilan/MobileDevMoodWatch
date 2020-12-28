@@ -26,8 +26,15 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
 
     public static final String MOODS_SAD = "sad.txt"; // TODO: per mood aanmaken
     public static final String MOODS_HAPPY = "happy.txt";
+    public static final String MOODS_ANGRY = "angry.txt";
+    public static final String MOODS_SCARED = "scared.txt";
+    public static final String MOODS_SLEEPY = "sleepy.txt";
+
     public final File fileHappy = new File(Environment.getDataDirectory(), MOODS_HAPPY);
     public final File fileSad = new File(Environment.getDataDirectory(), MOODS_SAD);
+    public final File fileAngry = new File(Environment.getDataDirectory(), MOODS_ANGRY);
+    public final File fileScared = new File(Environment.getDataDirectory(), MOODS_SCARED);
+    public final File fileSleepy = new File(Environment.getDataDirectory(), MOODS_SLEEPY);
     String currentMood;
 
     private String outputString;
@@ -49,8 +56,8 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
 // TODO:
     // 1 status checkbox overlopen. KLAAR
     // 2 Schrijven naar file KLAAR
-    // 3 verschillende files
-    // 4 file selectere en uitlezen.
+    // 3 verschillende files ZO GOED ALS KLAAR
+    // 4 file selectere en uitlezen. KLAAR
     // 5 data omzetten en een filter request doen.
 
     @Override

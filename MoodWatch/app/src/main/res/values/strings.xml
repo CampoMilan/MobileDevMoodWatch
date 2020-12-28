@@ -12,7 +12,6 @@
         <item>Angry</item>
         <item>Scared</item>
         <item>Sleepy</item>
-        <item>Thirst for Knowledge</item>
     </string-array>
 
     <string name="genre_action">Action</string>
