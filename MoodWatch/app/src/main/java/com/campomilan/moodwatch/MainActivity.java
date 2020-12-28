@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Element;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -72,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
     public void filtermovies(List<APIModelMovie> mMovieList, Moods mood) {
         List<APIModelMovie> NewmMovieList;
         NewmMovieList = new ArrayList<>();
-        APIModelMovie model = new APIModelMovie();
+        APIModelMovie model;
+        boolean isDouble = false;
 
         for (APIModelMovie e: mMovieList)     // de lijst met films doorlopen
         {
@@ -80,19 +82,48 @@ public class MainActivity extends AppCompatActivity {
             {
                 for(int j=0; j < mood.MoodID.length;j++) //het genre ID van de Mood doorlopan
                 {
-                       if (e.genreID.get(i) == mood.MoodID[j]) // het genre ID en de Mood ID vergelijken
-                       {
-                           model.setGenreID(e.getGenreID());
-                           model.setId(e.getId());
-                           model.setImgURL(e.getImgURL());
-                           model.setTitle(e.getTitle());
+                    isDouble = false;
+                    if (NewmMovieList.isEmpty() && e.getGenreID().get(i) == mood.MoodID[j])
+                    {
+                        model = new APIModelMovie();
+                        model.setGenreID(e.getGenreID());
+                        model.setId(e.getId());
+                        model.setImgURL(e.getImgURL());
+                        model.setTitle(e.getTitle());
 
-                           NewmMovieList.add(model);
-                       }
+                        NewmMovieList.add(model);
+                        //Log.d("model",String.valueOf(model.id));
+
+                    }
+                    else if (e.getGenreID().get(i) == mood.MoodID[j]) // het genre ID en de Mood ID vergelijken
+                    {
+                        for (int m =0; m < NewmMovieList.size(); m++ )
+                        {
+                            if(NewmMovieList.get(m).getId() == e.getId())
+                            {
+                                isDouble = true;
+                            }
+                        }
+
+                        if(isDouble == false)
+                        {
+                            model = new APIModelMovie();
+                            model.setGenreID(e.getGenreID());
+                            model.setId(e.getId());
+                            model.setImgURL(e.getImgURL());
+                            model.setTitle(e.getTitle());
+
+                            NewmMovieList.add(model);
+                        }
+                        //Log.d("model",String.valueOf(model.id));
+                    }
                 }
             }
         }
-
+        for (int i =0; i <NewmMovieList.size(); i++)
+            {
+            Log.d("newlist", String.valueOf(NewmMovieList.get(i).title));
+            }
         PutDataIntoRecyclerView(NewmMovieList);
         /*
         De nieuwe lijst printen.
