@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,17 +24,31 @@ import java.util.List;
 
 public class SelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static final String FILE_NAME = "moods.json"; // TODO: per mood aanmaken
-    final File fileMoods = new File(Environment.getDataDirectory(), FILE_NAME);
-    private String jsonString;
+    public static final String MOODS_SAD = "sad.txt"; // TODO: per mood aanmaken
+    public static final String MOODS_HAPPY = "happy.txt";
+    public final File fileHappy = new File(Environment.getDataDirectory(), MOODS_HAPPY);
+    public final File fileSad = new File(Environment.getDataDirectory(), MOODS_SAD);
+    String currentMood;
+
+    private String outputString;
+    private String text="";
 
     String[] moods;
     String selectedMood = "*select a mood first*!";
     TextView mSelectGenreTextView;
 
+    CheckBox mCheckboxAction;
+    CheckBox mCheckboxAdventure;
+    CheckBox mCheckboxComedy;
+    CheckBox mCheckboxDrama;
+    CheckBox mCheckboxHorror;
+    CheckBox mCheckboxRomance;
+    CheckBox mCheckboxThriller;
+
+
 // TODO:
-    // 1 status checkbox overlopen.
-    // 2 Schrijven naar file
+    // 1 status checkbox overlopen. KLAAR
+    // 2 Schrijven naar file KLAAR
     // 3 verschillende files
     // 4 file selectere en uitlezen.
     // 5 data omzetten en een filter request doen.
@@ -45,8 +60,17 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         mSelectGenreTextView = (TextView) findViewById(R.id.Text_SelectGenres);
         moods = getResources().getStringArray(R.array.mood_array);
 
+        mCheckboxAction = (CheckBox) findViewById(R.id.chk_action);
+        mCheckboxAdventure = (CheckBox) findViewById(R.id.chk_adventure);
+        mCheckboxComedy = (CheckBox) findViewById(R.id.chk_comedy);
+        mCheckboxDrama = (CheckBox) findViewById(R.id.chk_drama);
+        mCheckboxHorror = (CheckBox) findViewById(R.id.chk_horror);
+        mCheckboxRomance = (CheckBox) findViewById(R.id.chk_romance);
+        mCheckboxThriller = (CheckBox) findViewById(R.id.chk_thriller);
+
+
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
-        Spinner spinner  = findViewById(R.id.spinner_mood);
+        Spinner spinner = findViewById(R.id.spinner_mood);
         spinner.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the moods list
@@ -62,6 +86,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         selectedMood = (String) adapterView.getItemAtPosition(position);
         String selectGenresText = getResources().getString(R.string.select_genres) + " " + selectedMood;
         mSelectGenreTextView.setText(selectGenresText);
+        currentMood = selectedMood.toLowerCase() + ".txt";
     }
 
     @Override
@@ -69,15 +94,38 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void SubmitGenreSelection(View view) {
-        String text = "json die nog geschreven moet worden"; // TODO: JSON moet hier nog geparsed worden naar een string!
+
+        boolean checked = mCheckboxAction.isChecked();
+        text += String.valueOf(checked);
+        text += "\n";
+        checked = mCheckboxAdventure.isChecked();
+        text += String.valueOf(checked);
+        text += "\n";
+        checked = mCheckboxComedy.isChecked();
+        text += String.valueOf(checked);
+        text += "\n";
+        checked = mCheckboxDrama.isChecked();
+        text += String.valueOf(checked);
+        text += "\n";
+        checked = mCheckboxHorror.isChecked();
+        text += String.valueOf(checked);
+        text += "\n";
+        checked = mCheckboxRomance.isChecked();
+        text += String.valueOf(checked);
+        text += "\n";
+        checked = mCheckboxThriller.isChecked();
+        text += String.valueOf(checked);
+        text += "\n";
+
         FileOutputStream fos = null;
 
         //filestream openen om naar file te schrijven
+
         try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos = openFileOutput(currentMood, MODE_PRIVATE);
             fos.write(text.getBytes());
 
-            Log.d("json file", String.valueOf(fileMoods));
+            Log.d("json file", String.valueOf(currentMood));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -94,6 +142,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
             }
         }
         LoadMoodList(); //TESTING PURPOSES
+        text="";
     }
     //TODO: 1. Veranderen van activity naar de lijst met films en file daar openen en omzetten naar json
     //      2. json omzetten naar GET-request in TMDB-API
@@ -102,7 +151,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         FileInputStream fis = null;
 
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(currentMood);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
@@ -112,7 +161,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
                 sb.append(text).append("\n");
             }
 
-            this.jsonString = sb.toString();
+            this.outputString = sb.toString();
 
 
         } catch (FileNotFoundException e) {
@@ -120,15 +169,16 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(fis != null){
+            if (fis != null) {
                 try {
                     fis.close();
-                    Log.v("fileRead", this.jsonString);
+                    Log.v("fileRead", this.outputString);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
+
 
 }

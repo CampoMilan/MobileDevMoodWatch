@@ -62,7 +62,7 @@
         android:text="@string/genre_action"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Text_SelectGenres" />
+        app:layout_constraintTop_toBottomOf="@+id/Text_SelectGenres"/>
 
     <CheckBox
         android:id="@+id/chk_adventure"
@@ -71,7 +71,7 @@
         android:text="@string/genre_adventure"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_action" />
+        app:layout_constraintTop_toBottomOf="@+id/chk_action"/>
 
     <CheckBox
         android:id="@+id/chk_comedy"
@@ -80,7 +80,7 @@
         android:text="@string/genre_comedy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_adventure" />
+        app:layout_constraintTop_toBottomOf="@+id/chk_adventure"/>
 
     <CheckBox
         android:id="@+id/chk_drama"
@@ -98,7 +98,7 @@
     android:text="@string/genre_horror"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/chk_drama" />
+    app:layout_constraintTop_toBottomOf="@+id/chk_drama"/>
 
     <CheckBox
         android:id="@+id/chk_romance"
@@ -107,7 +107,7 @@
         android:text="@string/genre_romance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_horror" />
+        app:layout_constraintTop_toBottomOf="@+id/chk_horror"/>
 
     <CheckBox
         android:id="@+id/chk_thriller"
@@ -116,7 +116,7 @@
         android:text="@string/genre_thriller"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_romance" />
+        app:layout_constraintTop_toBottomOf="@+id/chk_romance"/>
 
     <Button
         android:id="@+id/Submit"
