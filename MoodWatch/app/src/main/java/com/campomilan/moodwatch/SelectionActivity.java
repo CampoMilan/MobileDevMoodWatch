@@ -143,6 +143,22 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         }
         LoadMoodList(); //TESTING PURPOSES
         text="";
+
+        //uncheck checkboxes after submitting
+        if(mCheckboxAction.isChecked())
+            mCheckboxAction.toggle();
+        if(mCheckboxAdventure.isChecked())
+            mCheckboxAdventure.toggle();
+        if(mCheckboxComedy.isChecked())
+            mCheckboxComedy.toggle();
+        if(mCheckboxDrama.isChecked())
+            mCheckboxDrama.toggle();
+        if(mCheckboxHorror.isChecked())
+            mCheckboxHorror.toggle();
+        if(mCheckboxRomance.isChecked())
+            mCheckboxRomance.toggle();
+        if(mCheckboxThriller.isChecked())
+            mCheckboxThriller.toggle();
     }
     //TODO: 1. Veranderen van activity naar de lijst met films en file daar openen en omzetten naar json
     //      2. json omzetten naar GET-request in TMDB-API
