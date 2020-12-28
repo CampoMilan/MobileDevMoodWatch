@@ -50,6 +50,11 @@ public class APIModelMovie {
         this.imgURL = this.imgURL + imgURL;
     }
 
+    public void setFullImgURL(String imgURL)
+    {
+        this.imgURL = imgURL;
+    }
+
     public  ArrayList<Integer> getGenreID(){return  genreID;}
     public void setGenreID(ArrayList<Integer> ID)
     {

@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         model = new APIModelMovie();
                         model.setGenreID(e.getGenreID());
                         model.setId(e.getId());
-                        model.setImgURL(e.getImgURL());
+                        model.setFullImgURL(e.getImgURL());
                         model.setTitle(e.getTitle());
 
                         NewmMovieList.add(model);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             model = new APIModelMovie();
                             model.setGenreID(e.getGenreID());
                             model.setId(e.getId());
-                            model.setImgURL(e.getImgURL());
+                            model.setFullImgURL(e.getImgURL());
                             model.setTitle(e.getTitle());
 
                             NewmMovieList.add(model);
@@ -131,11 +131,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // filteren op Mood/genre
-    public void FilterHappy(List<APIModelMovie> mMovielist) {
+    public void FilterHappy(List<APIModelMovie> mMovielist)
+    {
         String FILE_NAME = "happy.txt";
         int[] x = GetMoodIDs(FILE_NAME);
         Moods HAPPY = new Moods("HAPPY",x);
         filtermovies(mMovieList, HAPPY);
+    }
+
+    public void FilterSad(List<APIModelMovie> mMovielist)
+    {
+        String FILE_NAME = "sad.txt";
+        int[] x = GetMoodIDs(FILE_NAME);
+        Moods SAD = new Moods("SAD",x);
+        filtermovies(mMovieList,SAD);
+    }
+
+    public void FilterAngry(List<APIModelMovie> mMovielist)
+    {
+        String FILE_NAME = "angry.txt";
+        int[] x = GetMoodIDs(FILE_NAME);
+        Moods ANGRY = new Moods("ANGRY",x);
+        filtermovies(mMovieList,ANGRY);
+    }
+
+    public void FilterScared()
+    {
+        String FILE_NAME = "scared.txt";
+        int[] x = GetMoodIDs(FILE_NAME);
+        Moods SCARED = new Moods("SCARED",x);
+        filtermovies(mMovieList,SCARED);
+    }
+
+    public void FilterSleepy()
+    {
+        String FILE_NAME = "sleepy.txt";
+        int[] x = GetMoodIDs((FILE_NAME));
+        Moods SLEEPY = new Moods("SLEEPY",x);
+        filtermovies(mMovieList,SLEEPY);
     }
 
     // file ophalen en daar uit de MoodID's halen
