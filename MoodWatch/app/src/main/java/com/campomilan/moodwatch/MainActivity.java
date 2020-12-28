@@ -113,24 +113,23 @@ public class MainActivity extends AppCompatActivity {
     {
         LoadMoodList(File);
         String[] StringHolder;
-        int i = 0;
         int[] intHolder;
         String holder = this.outputString;
         ArrayList<Integer> ArrayHolder= new ArrayList<>();
-        StringHolder = holder.split("\\w+");
+        StringHolder = holder.split("\\n");
+        Log.d("testholder", holder);
         for (int j= 0; j <StringHolder.length; j++)
         {
-            if (StringHolder[i].toLowerCase() == "true")
+            if (StringHolder[j].equals("true"))
             {
-                ArrayHolder.add(this.genreID[i]);
+                ArrayHolder.add(this.genreID[j]);
             }
         }
         intHolder = new int[ArrayHolder.size()];
 
-        for (int e: ArrayHolder)
+        for (int i = 0; i<ArrayHolder.size() ;i++)
         {
             intHolder[i] = ArrayHolder.get(i);
-            i++;
         }
         return intHolder;
     }
