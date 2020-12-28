@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -24,6 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Element;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -40,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     List<APIModelMovie> mMovieList;
     RecyclerView mRecyclerView;
+    private String outputString;
+    private static int[] genreID = {28, 12, 35, 18, 27, 10749, 53};
+
 
 
     // TODO: button toevoegen voor next page. nu toont het enkel de eerste 20 films van de filter
@@ -94,10 +101,41 @@ public class MainActivity extends AppCompatActivity {
 
     // filteren op Mood/genre
     public void FilterHappy(List<APIModelMovie> mMovielist) {
-        int[] x = {28};
-        Moods Action = new Moods("Action",x);
-        filtermovies(mMovieList,Action);
+        String FILE_NAME = "MOODS_HAPPY";
+        int[] x = GetMoodIDs(FILE_NAME);
+        Moods HAPPY = new Moods("HAPPY",x);
+        filtermovies(mMovieList, HAPPY);
     }
+
+    // file ophalen en daar uit de MoodID's halen
+
+    public int[] GetMoodIDs(String File)
+    {
+        LoadMoodList(File);
+        String[] StringHolder;
+        int i = 0;
+        int[] intHolder;
+        String holder = this.outputString;
+        ArrayList<Integer> ArrayHolder= new ArrayList<>();
+        StringHolder = holder.split("\\w+");
+        for (int j= 0; j <StringHolder.length; j++)
+        {
+            if (StringHolder[i].toLowerCase() == "true")
+            {
+                ArrayHolder.add(this.genreID[i]);
+            }
+        }
+        intHolder = new int[ArrayHolder.size()];
+
+        for (int e: ArrayHolder)
+        {
+            intHolder[i] = ArrayHolder.get(i);
+            i++;
+        }
+        return intHolder;
+    }
+
+
     //btn_click
     public void FilterHappy_btnClick(View view) {
         FilterHappy(mMovieList);
@@ -206,4 +244,39 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void LoadMoodList(String FILE_NAME) {
+        FileInputStream fis = null;
+
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                sb.append(text).append("\n");
+            }
+
+            this.outputString = sb.toString();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null){
+                try {
+                    fis.close();
+                    Log.v("fileRead", this.outputString);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 }

@@ -51,7 +51,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     // 2 Schrijven naar file KLAAR
     // 3 verschillende files
     // 4 file selectere en uitlezen.
-    // 5 data omzetten en een filter request doen.
+    // 5 data omzetten en een filter request doen. VOOR mij
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
