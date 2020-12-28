@@ -23,13 +23,14 @@ import java.util.List;
 
 public class SelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static final String FILE_NAME = "moods.json";
+    private static final String FILE_NAME = "moods.json"; // TODO: per mood aanmaken
     final File fileMoods = new File(Environment.getDataDirectory(), FILE_NAME);
+    private String jsonString;
 
     String[] moods;
     String selectedMood = "*select a mood first*!";
     TextView mSelectGenreTextView;
-    private String jsonString;
+
 
 
     @Override
@@ -87,7 +88,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
                 }
             }
         }
-        LoadMoodList();
+        LoadMoodList(); //TESTING PURPOSES
     }
     //TODO: 1. Veranderen van activity naar de lijst met films en file daar openen en omzetten naar json
     //      2. json omzetten naar GET-request in TMDB-API
