@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
 
 
-
+    // TODO: button toevoegen voor next page. nu toont het enkel de eerste 20 films van de filter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Algemene poging om data te filteren oafhankelijk van de knop waarop is gedrukt.
-    //lijst meegeven met de alle films in en ook een mood megeven
+    //lijst meegeven met de alle films in en ook een mood meegeven
 
     public void filtermovies(List<APIModelMovie> mMovieList, Moods mood) {
         List<APIModelMovie> NewmMovieList;

@@ -3,20 +3,30 @@ package com.campomilan.moodwatch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class SelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private static final String FILE_NAME = "moods.json";
+    final File fileMoods = new File(Environment.getDataDirectory(), FILE_NAME);
+
     String[] moods;
     String selectedMood= "*select a mood first*!";
     TextView mSelectGenreTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +59,33 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void SubmitGenreSelection(View view) {
-        //TODO: genres linken aan geselecteerde mood
-        // voorstel 1: classe mood met nodige naam een array waarin we moods kunnen opslaan
+        String text = "json die nog geschreven moet worden"; // TODO: JSON moet hier nog geparsed worden naar een string!
+        FileOutputStream fos = null;
+
+        //filestream openen om naar file te schrijven
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(text.getBytes());
+
+            Log.d("json file", String.valueOf(fileMoods));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // einde filestream
+            if (fos != null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        //TODO: 1. Veranderen van activity naar de lijst met films en file daar openen en omzetten naar json
+        //      2. json omzetten naar GET-request in TMDB-API
+
     }
 }
