@@ -11,10 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,15 +27,16 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     final File fileMoods = new File(Environment.getDataDirectory(), FILE_NAME);
 
     String[] moods;
-    String selectedMood= "*select a mood first*!";
+    String selectedMood = "*select a mood first*!";
     TextView mSelectGenreTextView;
+    private String jsonString;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
-        mSelectGenreTextView = (TextView)findViewById(R.id.Text_SelectGenres);
+        mSelectGenreTextView = (TextView) findViewById(R.id.Text_SelectGenres);
         moods = getResources().getStringArray(R.array.mood_array);
 
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
@@ -49,7 +53,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        selectedMood = (String)adapterView.getItemAtPosition(position);
+        selectedMood = (String) adapterView.getItemAtPosition(position);
         String selectGenresText = getResources().getString(R.string.select_genres) + " " + selectedMood;
         mSelectGenreTextView.setText(selectGenresText);
     }
@@ -75,7 +79,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
             e.printStackTrace();
         } finally {
             // einde filestream
-            if (fos != null){
+            if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException e) {
@@ -83,9 +87,42 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
                 }
             }
         }
-
-        //TODO: 1. Veranderen van activity naar de lijst met films en file daar openen en omzetten naar json
-        //      2. json omzetten naar GET-request in TMDB-API
-
+        LoadMoodList();
     }
+    //TODO: 1. Veranderen van activity naar de lijst met films en file daar openen en omzetten naar json
+    //      2. json omzetten naar GET-request in TMDB-API
+
+    public void LoadMoodList() {
+        FileInputStream fis = null;
+
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                sb.append(text).append("\n");
+            }
+
+            this.jsonString = sb.toString();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null){
+                try {
+                    fis.close();
+                    Log.v("fileRead", this.jsonString);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
