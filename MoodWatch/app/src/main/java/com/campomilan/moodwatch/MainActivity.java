@@ -205,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
         //om een of andere reden moet dees wat het zou eens allemaal mooi samen kunne
     }
 
+    public void NavigateSelection(View view) {
+        finish();
+    }
+
     public class GetData extends AsyncTask<String, String, String>{
 
         @Override

@@ -26,10 +26,19 @@
         android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="169dp"
+        android:id="@+id/btn_filterHappy"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
         android:onClick="FilterHappy_btnClick"
         android:text="@string/btn_Happy" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="Back"
+        android:onClick="NavigateSelection"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

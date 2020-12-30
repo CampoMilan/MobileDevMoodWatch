@@ -25,7 +25,7 @@ import java.util.List;
 
 public class SelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    public static final String MOODS_SAD = "sad.txt"; // TODO: per mood aanmaken
+    public static final String MOODS_SAD = "sad.txt";
     public static final String MOODS_HAPPY = "happy.txt";
     public static final String MOODS_ANGRY = "angry.txt";
     public static final String MOODS_SCARED = "scared.txt";
