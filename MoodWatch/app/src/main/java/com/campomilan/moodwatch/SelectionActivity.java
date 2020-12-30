@@ -2,6 +2,7 @@ package com.campomilan.moodwatch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -38,7 +39,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     String currentMood;
 
     private String outputString;
-    private String text="";
+    private String text = "";
 
     String[] moods;
     String selectedMood = "*select a mood first*!";
@@ -149,23 +150,25 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
             }
         }
         LoadMoodList(); //TESTING PURPOSES
-        text="";
+        text = "";
 
         //uncheck checkboxes after submitting
-        if(mCheckboxAction.isChecked())
+        if (mCheckboxAction.isChecked())
             mCheckboxAction.toggle();
-        if(mCheckboxAdventure.isChecked())
+        if (mCheckboxAdventure.isChecked())
             mCheckboxAdventure.toggle();
-        if(mCheckboxComedy.isChecked())
+        if (mCheckboxComedy.isChecked())
             mCheckboxComedy.toggle();
-        if(mCheckboxDrama.isChecked())
+        if (mCheckboxDrama.isChecked())
             mCheckboxDrama.toggle();
-        if(mCheckboxHorror.isChecked())
+        if (mCheckboxHorror.isChecked())
             mCheckboxHorror.toggle();
-        if(mCheckboxRomance.isChecked())
+        if (mCheckboxRomance.isChecked())
             mCheckboxRomance.toggle();
-        if(mCheckboxThriller.isChecked())
+        if (mCheckboxThriller.isChecked())
             mCheckboxThriller.toggle();
+
+        startActivity(new Intent(SelectionActivity.this, MainActivity.class));
     }
     //TODO: 1. Veranderen van activity naar de lijst met films en file daar openen en omzetten naar json
     //      2. json omzetten naar GET-request in TMDB-API
