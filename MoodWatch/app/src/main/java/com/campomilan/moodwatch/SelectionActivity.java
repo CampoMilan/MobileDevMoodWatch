@@ -87,7 +87,6 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-
     }
 
     @Override
@@ -97,7 +96,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         mSelectGenreTextView.setText(selectGenresText);
         currentMood = selectedMood.toLowerCase() + ".txt";
         Log.d("current_mood: ", currentMood);
-        checkboxsettest();
+        checkboxset();
 
     }
 
@@ -157,20 +156,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         text = "";
 
         //uncheck checkboxes after submitting
-        if (mCheckboxAction.isChecked())
-            mCheckboxAction.toggle();
-        if (mCheckboxAdventure.isChecked())
-            mCheckboxAdventure.toggle();
-        if (mCheckboxComedy.isChecked())
-            mCheckboxComedy.toggle();
-        if (mCheckboxDrama.isChecked())
-            mCheckboxDrama.toggle();
-        if (mCheckboxHorror.isChecked())
-            mCheckboxHorror.toggle();
-        if (mCheckboxRomance.isChecked())
-            mCheckboxRomance.toggle();
-        if (mCheckboxThriller.isChecked())
-            mCheckboxThriller.toggle();
+        // checkboxreset();
 
         startActivity(new Intent(SelectionActivity.this, MainActivity.class));
     }
@@ -228,13 +214,13 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
             mCheckboxThriller.toggle();
     }
 
-    public void checkboxsetter(String MOOD_TXT){
+    public void checkboxset(){
         LoadMoodList();
         String[] StringHolder;
         String holder = this.outputString;
-        StringHolder = holder.split("\\n");
-        Log.d("test3", "post regex");
-        for (int i = 0; i< StringHolder.length;i++){Log.d("Stringholder_content",StringHolder[i]);}
+        Log.d("outputsring",outputString);
+        StringHolder = holder.split("\n");
+ //       for (int i = 0; i< StringHolder.length;i++){Log.d("Stringholder_content",StringHolder[i]);}
         checkboxreset();
         if (StringHolder[0].equals("true")){mCheckboxAction.toggle();}
         if (StringHolder[1].equals("true")){mCheckboxAdventure.toggle();}
@@ -244,20 +230,6 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         if (StringHolder[5].equals("true")){mCheckboxRomance.toggle();}
         if (StringHolder[6].equals("true")){mCheckboxThriller.toggle();}
     }
-
-    public void checkboxsettest()
-    {
-        String [] StringHolder= {"true","false","true","false","true","false","true"};
-        checkboxreset();
-        if (StringHolder[0].equals("true")){mCheckboxAction.toggle();}
-        if (StringHolder[1].equals("true")){mCheckboxAdventure.toggle();}
-        if (StringHolder[2].equals("true")){mCheckboxComedy.toggle();}
-        if (StringHolder[3].equals("true")){mCheckboxDrama.toggle();}
-        if (StringHolder[4].equals("true")){mCheckboxHorror.toggle();}
-        if (StringHolder[5].equals("true")){mCheckboxRomance.toggle();}
-        if (StringHolder[6].equals("true")){mCheckboxThriller.toggle();}
-    }
-
 
 
 }
