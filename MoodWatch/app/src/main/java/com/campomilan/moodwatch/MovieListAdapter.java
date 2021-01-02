@@ -1,6 +1,7 @@
 package com.campomilan.moodwatch;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,9 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         //id and title bind
 
         holder.id.setText(mData.get(position).getId());
+        holder.id.setTextColor(Color.parseColor("#DAC503"));
         holder.title.setText(mData.get(position).getTitle());
+        holder.title.setTextColor(Color.parseColor("#DAC503"));
 
         //img bind
         Glide.with(mContext)

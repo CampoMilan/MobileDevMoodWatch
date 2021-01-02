@@ -3,6 +3,7 @@ package com.campomilan.moodwatch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -92,6 +93,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         selectedMood = (String) adapterView.getItemAtPosition(position);
+        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
         String selectGenresText = getResources().getString(R.string.select_genres) + " " + selectedMood;
         mSelectGenreTextView.setText(selectGenresText);
         currentMood = selectedMood.toLowerCase() + ".txt";
