@@ -7,9 +7,4 @@
         android:orderInCategory="1"
         android:title="@string/action_moods"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_order"
-        android:orderInCategory="10"
-        android:title= "@string/action_order"
-        app:showAsAction="never"/>
 </menu>

@@ -31,15 +31,19 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
+        android:background="@color/colorAccent"
         android:onClick="FilterHappy_btnClick"
-        android:text="@string/btn_Happy" />
+        android:text="@string/btn_Happy"
+        android:textColor="@color/colorPrimaryDark" />
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:background="@color/colorAccent"
+        android:onClick="NavigateSelection"
         android:text="Back"
-        android:onClick="NavigateSelection"/>
+        android:textColor="@color/colorPrimaryDark" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

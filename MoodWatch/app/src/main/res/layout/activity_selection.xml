@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".SelectionActivity">
 
     <TextView
@@ -13,6 +14,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/label_moods"
         android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,11 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:textColor="@android:color/background_light"
+        android:popupBackground="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Text_SelectMood"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/Text_SelectMood" />
 
     <TextView
         android:id="@+id/Text_SelectMood"
@@ -39,6 +42,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:text="@string/select_moods"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SelectionTitle" />
@@ -51,6 +55,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/select_genres"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_mood" />
@@ -60,72 +65,81 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/genre_action"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Text_SelectGenres"/>
+        app:layout_constraintTop_toBottomOf="@+id/Text_SelectGenres" />
 
     <CheckBox
         android:id="@+id/chk_adventure"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/genre_adventure"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_action"/>
+        app:layout_constraintTop_toBottomOf="@+id/chk_action" />
 
     <CheckBox
         android:id="@+id/chk_comedy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/genre_comedy"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_adventure"/>
+        app:layout_constraintTop_toBottomOf="@+id/chk_adventure" />
 
     <CheckBox
         android:id="@+id/chk_drama"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/genre_drama"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chk_comedy" />
 
     <CheckBox
-    android:id="@+id/chk_horror"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:text="@string/genre_horror"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/chk_drama"/>
+        android:id="@+id/chk_horror"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_horror"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chk_drama" />
 
     <CheckBox
         android:id="@+id/chk_romance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/genre_romance"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_horror"/>
+        app:layout_constraintTop_toBottomOf="@+id/chk_horror" />
 
     <CheckBox
         android:id="@+id/chk_thriller"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/genre_thriller"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_romance"/>
+        app:layout_constraintTop_toBottomOf="@+id/chk_romance" />
 
     <Button
         android:id="@+id/Submit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:onClick="SubmitGenreSelection"
         android:text="@string/btn_submitSelection"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="SubmitGenreSelection"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
