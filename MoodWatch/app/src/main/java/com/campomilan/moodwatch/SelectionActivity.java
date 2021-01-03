@@ -100,6 +100,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         mSelectGenreTextView.setText(selectGenresText);
         currentMood = selectedMood.toLowerCase() + ".txt";
 //        Log.d("current_mood: ", currentMood);
+
       checkboxset();
 
     }
@@ -248,13 +249,17 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void checkboxset(){
+
         LoadMoodList();
         String[] StringHolder;
         String holder = this.outputString;
   //      Log.d("outputsring",outputString);
+        Log.d("testpurp","ik geraak tot hier");
+        if (holder != null){
         StringHolder = holder.split("\n");
  //       for (int i = 0; i< StringHolder.length;i++){Log.d("Stringholder_content",StringHolder[i]);}
         checkboxreset();
+        Log.d("testpurp","ik geraak hier niet");
         if (StringHolder[0].equals("true")){mCheckboxAction.toggle();}
         if (StringHolder[1].equals("true")){mCheckboxAdventure.toggle();}
         if (StringHolder[2].equals("true")){mCheckboxComedy.toggle();}
@@ -262,6 +267,8 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         if (StringHolder[4].equals("true")){mCheckboxHorror.toggle();}
         if (StringHolder[5].equals("true")){mCheckboxRomance.toggle();}
         if (StringHolder[6].equals("true")){mCheckboxThriller.toggle();}
+        }
+
     }
 
 
