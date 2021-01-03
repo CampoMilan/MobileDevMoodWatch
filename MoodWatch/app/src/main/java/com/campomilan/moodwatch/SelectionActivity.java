@@ -99,7 +99,6 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         String selectGenresText = getResources().getString(R.string.select_genres) + " " + selectedMood;
         mSelectGenreTextView.setText(selectGenresText);
         currentMood = selectedMood.toLowerCase() + ".txt";
-//        Log.d("current_mood: ", currentMood)
 
         checkboxreset();
         checkboxset();
@@ -158,7 +157,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
                 }
             }
         }
-        LoadMoodList(); //TESTING PURPOSES
+
         text = "";
 
         //filestream voor de current.txt file en daarin de currentmood in toe te voegen
@@ -189,9 +188,6 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
             }
         }
         text="";
-
-        //uncheck checkboxes after submitting
-        // checkboxreset();
 
         startActivity(new Intent(SelectionActivity.this, MainActivity.class));
     }
@@ -251,20 +247,18 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
             mCheckboxThriller.toggle();
     }
 
+
+    // functie die zorgt dat de genres die waren geselecteerd voor een bepaalde Mood worden opgehaald en omgezet naar bruikbardata om zo de juiste checkboxen aan te vinken
     public void checkboxset(){
 
-        LoadMoodList();
+        LoadMoodList();             //ophalen van de string
         String[] StringHolder;
         String holder = this.outputString;
-  //      Log.d("outputsring",outputString);
-        Log.d("testpurp","ik geraak tot hier");
-        Log.d("testpurp",String.valueOf(this.currentMood));
-        Log.d("testpurp", String.valueOf(this.outputString));
         if (holder != null ){
-        StringHolder = holder.split("\n");
- //       for (int i = 0; i< StringHolder.length;i++){Log.d("Stringholder_content",StringHolder[i]);}
+        StringHolder = holder.split("\n"); //String omzetten naar array
         checkboxreset();
 
+        // Waarde controleren en indien nodig de checkbox aanvinken
         if (StringHolder[0].equals("true")){mCheckboxAction.toggle();}
         if (StringHolder[1].equals("true")){mCheckboxAdventure.toggle();}
         if (StringHolder[2].equals("true")){mCheckboxComedy.toggle();}

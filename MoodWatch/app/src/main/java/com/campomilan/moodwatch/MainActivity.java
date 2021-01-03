@@ -40,7 +40,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //This link is for testing purposes only!!!
     private static String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=250ae9a3b22b8c7bdcc469913a866ce8&language=en-US&page=1";
 
     List<APIModelMovie> mMovieList;
@@ -49,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private String currentMood;
     private static int[] genreID = {28, 12, 35, 18, 27, 10749, 53};
 
-
-
-    // TODO: button toevoegen voor next page. nu toont het enkel de eerste 20 films van de filter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +64,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Algemene poging om data te filteren oafhankelijk van de knop waarop is gedrukt.
-    //lijst meegeven met de alle films in en ook een mood meegeven
+    //Algemene functie om de data te filteren op basis van de geselecteerde genres bij een bepaalde mood.
 
     public void filtermovies(List<APIModelMovie> mMovieList, Moods mood) {
         List<APIModelMovie> NewmMovieList;
         NewmMovieList = new ArrayList<>();
         APIModelMovie model;
-        boolean isDouble = false;
+        boolean isDouble;
 
         for (APIModelMovie e: mMovieList)     // de lijst met films doorlopen
         {
@@ -93,14 +88,13 @@ public class MainActivity extends AppCompatActivity {
                         model.setTitle(e.getTitle());
 
                         NewmMovieList.add(model);
-                        //Log.d("model",String.valueOf(model.id));
 
                     }
                     else if (e.getGenreID().get(i) == mood.MoodID[j]) // het genre ID en de Mood ID vergelijken
                     {
                         for (int m =0; m < NewmMovieList.size(); m++ )
                         {
-                            if(NewmMovieList.get(m).getId() == e.getId())
+                            if(NewmMovieList.get(m).getId() == e.getId()) // controleren of de film al in de lijst staat. om dubbels te vermijden
                             {
                                 isDouble = true;
                             }
@@ -116,88 +110,46 @@ public class MainActivity extends AppCompatActivity {
 
                             NewmMovieList.add(model);
                         }
-                        //Log.d("model",String.valueOf(model.id));
                     }
                 }
             }
         }
-        for (int i =0; i <NewmMovieList.size(); i++)
-            {
-            Log.d("newlist", String.valueOf(NewmMovieList.get(i).title));
-            }
+
+        //      De nieuwe lijst printen.
         PutDataIntoRecyclerView(NewmMovieList);
-        /*
-        De nieuwe lijst printen.
-        */
+
     }
 
     // filteren op Mood/genre
-    public void FilterHappy(List<APIModelMovie> mMovielist)
+    public void Filter(List<APIModelMovie> mMovielist)
     {
         String[] StringHolder;
         LoadMoodCurrent();
         String holder = this.currentMood;
         StringHolder = holder.split("\\n");
-        Log.d("currentMood",String.valueOf(StringHolder[0]));
- //       Log.d("currentMood",String.valueOf(StringHolder[1]));
         String FILE_NAME = StringHolder[0];
-    Log.d("FILE: ",String.valueOf(FILE_NAME));
         int[] x = GetMoodIDs(FILE_NAME);
         Moods HAPPY = new Moods("HAPPY",x);
         filtermovies(mMovieList, HAPPY);
     }
 
-    public void FilterSad(List<APIModelMovie> mMovielist)
-    {
-        String FILE_NAME = "sad.txt";
-        int[] x = GetMoodIDs(FILE_NAME);
-        Moods SAD = new Moods("SAD",x);
-        filtermovies(mMovieList,SAD);
-    }
-
-    public void FilterAngry(List<APIModelMovie> mMovielist)
-    {
-        String FILE_NAME = "angry.txt";
-        int[] x = GetMoodIDs(FILE_NAME);
-        Moods ANGRY = new Moods("ANGRY",x);
-        filtermovies(mMovieList,ANGRY);
-    }
-
-    public void FilterScared(List<APIModelMovie> mMovielist)
-    {
-        String FILE_NAME = "scared.txt";
-        int[] x = GetMoodIDs(FILE_NAME);
-        Moods SCARED = new Moods("SCARED",x);
-        filtermovies(mMovieList,SCARED);
-    }
-
-    public void FilterSleepy(List<APIModelMovie> mMovielist)
-    {
-        String FILE_NAME = "sleepy.txt";
-        int[] x = GetMoodIDs((FILE_NAME));
-        Moods SLEEPY = new Moods("SLEEPY",x);
-        filtermovies(mMovieList,SLEEPY);
-    }
-
     // file ophalen en daar uit de MoodID's halen
-
     public int[] GetMoodIDs(String File)
     {
-        LoadMoodList(File);
+        LoadMoodList(File); // laden van de correcte data in de outputString
         String[] StringHolder;
         int[] intHolder;
-        String holder = this.outputString;
+        String holder = this.outputString; // outputstring om zetten naar een array
         ArrayList<Integer> ArrayHolder= new ArrayList<>();
         StringHolder = holder.split("\\n");
-        Log.d("testholder", holder);
         for (int j= 0; j <StringHolder.length; j++)
         {
-            if (StringHolder[j].equals("true"))
+            if (StringHolder[j].equals("true")) //controleren of de genre id's van de film waren geselecteerd bij de currentMood
             {
-                ArrayHolder.add(this.genreID[j]);
+                ArrayHolder.add(this.genreID[j]); // indien bijde er een match is worden de genre id's aan een arraylist toegevoegd.
             }
         }
-        intHolder = new int[ArrayHolder.size()];
+        intHolder = new int[ArrayHolder.size()];  // arraylist omzetten naar int[] (in de mood klassen maken we gebruik van int[] en geen ArrayList
 
         for (int i = 0; i<ArrayHolder.size() ;i++)
         {
@@ -209,8 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
     //btn_click
     public void FilterHappy_btnClick(View view) {
-        FilterHappy(mMovieList);
-        //om een of andere reden moet dees wat het zou eens allemaal mooi samen kunne
+        Filter(mMovieList);
     }
 
     public void NavigateSelection(View view) {
@@ -292,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
 
         MovieListAdapter adapterMovie = new MovieListAdapter(this, movieList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mRecyclerView.setAdapter(adapterMovie);
 
     }
@@ -320,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // opvragen van een (Mood).txt bestand om de juiste configuratie optehalen
     public void LoadMoodList(String FILE_NAME) {
         FileInputStream fis = null;
 
@@ -345,7 +296,6 @@ public class MainActivity extends AppCompatActivity {
             if(fis != null){
                 try {
                     fis.close();
-                    Log.v("fileRead", this.outputString);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -353,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // ophalen van de geselecteerde Mood uit de current.txt file
     public void LoadMoodCurrent() {
         FileInputStream fis = null;
 
@@ -378,7 +329,6 @@ public class MainActivity extends AppCompatActivity {
             if(fis != null){
                 try {
                     fis.close();
-                    Log.v("fileRead", this.currentMood);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

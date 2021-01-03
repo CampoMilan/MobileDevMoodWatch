@@ -17,7 +17,7 @@ public class Moods {
     public String getName(){return Name;}
     public int[] getMoodID(){return MoodID;}
 
-    //Hiervoor gaan we gebruik moeten maken van de secondActivity
+    //It just works ~Tod Howard
     public int[] setMoodID(int NewMoodID)
     {
         int[] MoodIDHolder = new int[this.MoodID.length+1];
@@ -34,10 +34,11 @@ public class Moods {
             MoodIDHolder[i] = this.MoodID[i];
         }
             MoodIDHolder[this.MoodID.length+1] = NewMoodID;
-            return MoodIDHolder; // gaat waarschijnlijk moeten uitbreiden. want het is een beetje omslachtig.
+            return MoodIDHolder;
     }
 }
 /*
+genre id volgense de API
             Action 28
             Adventure 12
             Animation 16
