@@ -99,9 +99,10 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         String selectGenresText = getResources().getString(R.string.select_genres) + " " + selectedMood;
         mSelectGenreTextView.setText(selectGenresText);
         currentMood = selectedMood.toLowerCase() + ".txt";
-//        Log.d("current_mood: ", currentMood);
+//        Log.d("current_mood: ", currentMood)
 
-      checkboxset();
+        checkboxreset();
+        checkboxset();
 
     }
 
@@ -215,6 +216,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
 
 
         } catch (FileNotFoundException e) {
+            this.outputString = null;
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -224,6 +226,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
                     fis.close();
                     Log.v("fileRead", this.outputString);
                 } catch (IOException e) {
+                    this.outputString = null;
                     e.printStackTrace();
                 }
             }
@@ -255,11 +258,13 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         String holder = this.outputString;
   //      Log.d("outputsring",outputString);
         Log.d("testpurp","ik geraak tot hier");
-        if (holder != null){
+        Log.d("testpurp",String.valueOf(this.currentMood));
+        Log.d("testpurp", String.valueOf(this.outputString));
+        if (holder != null ){
         StringHolder = holder.split("\n");
  //       for (int i = 0; i< StringHolder.length;i++){Log.d("Stringholder_content",StringHolder[i]);}
         checkboxreset();
-        Log.d("testpurp","ik geraak hier niet");
+
         if (StringHolder[0].equals("true")){mCheckboxAction.toggle();}
         if (StringHolder[1].equals("true")){mCheckboxAdventure.toggle();}
         if (StringHolder[2].equals("true")){mCheckboxComedy.toggle();}
