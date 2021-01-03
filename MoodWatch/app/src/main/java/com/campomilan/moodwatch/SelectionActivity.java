@@ -31,12 +31,14 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     public static final String MOODS_ANGRY = "angry.txt";
     public static final String MOODS_SCARED = "scared.txt";
     public static final String MOODS_SLEEPY = "sleepy.txt";
+    public static final String MOODS_CURRENT ="current.txt"; //added
 
     public final File fileHappy = new File(Environment.getDataDirectory(), MOODS_HAPPY);
     public final File fileSad = new File(Environment.getDataDirectory(), MOODS_SAD);
     public final File fileAngry = new File(Environment.getDataDirectory(), MOODS_ANGRY);
     public final File fileScared = new File(Environment.getDataDirectory(), MOODS_SCARED);
     public final File fileSleepy = new File(Environment.getDataDirectory(), MOODS_SLEEPY);
+    public final File fileCurrent = new File(Environment.getDataDirectory(),MOODS_CURRENT); //added
     String currentMood;
 
     private String outputString;
@@ -97,7 +99,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         String selectGenresText = getResources().getString(R.string.select_genres) + " " + selectedMood;
         mSelectGenreTextView.setText(selectGenresText);
         currentMood = selectedMood.toLowerCase() + ".txt";
-        Log.d("current_mood: ", currentMood);
+//        Log.d("current_mood: ", currentMood);
         checkboxset();
 
     }
@@ -156,6 +158,35 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         }
         LoadMoodList(); //TESTING PURPOSES
         text = "";
+
+        //filestream voor de current.txt file en daarin de currentmood in toe te voegen
+
+        text = currentMood;
+        text += "\n";
+
+        fos = null;
+
+        try {
+            fos = openFileOutput(currentMood, MODE_PRIVATE);
+            fos.write(text.getBytes());
+
+            Log.d("json file", String.valueOf(currentMood));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // einde filestream
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        text="";
 
         //uncheck checkboxes after submitting
         // checkboxreset();
@@ -220,7 +251,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         LoadMoodList();
         String[] StringHolder;
         String holder = this.outputString;
-        Log.d("outputsring",outputString);
+  //      Log.d("outputsring",outputString);
         StringHolder = holder.split("\n");
  //       for (int i = 0; i< StringHolder.length;i++){Log.d("Stringholder_content",StringHolder[i]);}
         checkboxreset();
