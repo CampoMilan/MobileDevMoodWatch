@@ -56,14 +56,15 @@ public class APIModelMovie {
     }
 
     public  ArrayList<Integer> getGenreID(){return  genreID;}
+
     public void setGenreID(ArrayList<Integer> ID)
     {
         this.genreID = ID;
     }
+
+    // functie die een zet een  JsonArray (voor de genre ids) om in een ArrayList. (nodig voor het ophalen van de API)
     public void setGenreIDFromJSON(JSONArray jsonArray) {
 
-        // In deze functie gaan we de Array genre id die we via de API hebben verkregen en in een String hebben moeten opslaan terug (proberen) om te zetten naar een int[]
-        // inkomende string [12,4,10751,16] Regex = "\d+"
 
         ArrayList<Integer> Holder = new ArrayList<>();
         try

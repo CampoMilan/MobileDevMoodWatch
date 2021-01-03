@@ -31,14 +31,14 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
     public static final String MOODS_ANGRY = "angry.txt";
     public static final String MOODS_SCARED = "scared.txt";
     public static final String MOODS_SLEEPY = "sleepy.txt";
-    public static final String MOODS_CURRENT = "current.txt"; //added
+    public static final String MOODS_CURRENT ="current.txt"; //added
 
     public final File fileHappy = new File(Environment.getDataDirectory(), MOODS_HAPPY);
     public final File fileSad = new File(Environment.getDataDirectory(), MOODS_SAD);
     public final File fileAngry = new File(Environment.getDataDirectory(), MOODS_ANGRY);
     public final File fileScared = new File(Environment.getDataDirectory(), MOODS_SCARED);
     public final File fileSleepy = new File(Environment.getDataDirectory(), MOODS_SLEEPY);
-    public final File fileCurrent = new File(Environment.getDataDirectory(), MOODS_CURRENT); //added
+    public final File fileCurrent = new File(Environment.getDataDirectory(),MOODS_CURRENT); //added
     String currentMood;
 
     private String outputString;
@@ -136,7 +136,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
                 }
             }
         }
-        LoadMoodList(); //TESTING PURPOSES
+
         text = "";
 
         //filestream voor de current.txt file en daarin de currentmood in toe te voegen
@@ -167,9 +167,6 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
             }
         }
         text = "";
-
-        //uncheck checkboxes after submitting
-        // checkboxreset();
 
         startActivity(new Intent(SelectionActivity.this, MainActivity.class));
     }
@@ -216,15 +213,16 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         }
     }
 
+
+    // functie die zorgt dat de genres die waren geselecteerd voor een bepaalde Mood worden opgehaald en omgezet naar bruikbardata om zo de juiste checkboxen aan te vinken
     public void checkboxset() {
 
-        LoadMoodList();
+        LoadMoodList();             //ophalen van de string
         String[] StringHolder;
         String holder = this.outputString;
-        if (holder != null) {
-            StringHolder = holder.split("\n");
-            //       for (int i = 0; i< StringHolder.length;i++){Log.d("Stringholder_content",StringHolder[i]);}
-            checkboxreset();
+        if (holder != null ){
+        StringHolder = holder.split("\n"); //String omzetten naar array
+        checkboxreset();
 
             for (int i = 0; i < mCheckboxes.size(); i++) {
                 if (StringHolder[i].equals("true")) {
