@@ -100,7 +100,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         mSelectGenreTextView.setText(selectGenresText);
         currentMood = selectedMood.toLowerCase() + ".txt";
 //        Log.d("current_mood: ", currentMood);
-        checkboxset();
+      checkboxset();
 
     }
 
@@ -167,7 +167,7 @@ public class SelectionActivity extends AppCompatActivity implements AdapterView.
         fos = null;
 
         try {
-            fos = openFileOutput(currentMood, MODE_PRIVATE);
+            fos = openFileOutput("current.txt", MODE_PRIVATE);
             fos.write(text.getBytes());
 
             Log.d("json file", String.valueOf(currentMood));

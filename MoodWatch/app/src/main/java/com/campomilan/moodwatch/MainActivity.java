@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     List<APIModelMovie> mMovieList;
     RecyclerView mRecyclerView;
     private String outputString;
+    private String currentMood;
     private static int[] genreID = {28, 12, 35, 18, 27, 10749, 53};
 
 
@@ -133,7 +134,14 @@ public class MainActivity extends AppCompatActivity {
     // filteren op Mood/genre
     public void FilterHappy(List<APIModelMovie> mMovielist)
     {
-        String FILE_NAME = "happy.txt";
+        String[] StringHolder;
+        LoadMoodCurrent();
+        String holder = this.currentMood;
+        StringHolder = holder.split("\\n");
+        Log.d("currentMood",String.valueOf(StringHolder[0]));
+ //       Log.d("currentMood",String.valueOf(StringHolder[1]));
+        String FILE_NAME = StringHolder[0];
+    Log.d("FILE: ",String.valueOf(FILE_NAME));
         int[] x = GetMoodIDs(FILE_NAME);
         Moods HAPPY = new Moods("HAPPY",x);
         filtermovies(mMovieList, HAPPY);
@@ -155,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         filtermovies(mMovieList,ANGRY);
     }
 
-    public void FilterScared()
+    public void FilterScared(List<APIModelMovie> mMovielist)
     {
         String FILE_NAME = "scared.txt";
         int[] x = GetMoodIDs(FILE_NAME);
@@ -163,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         filtermovies(mMovieList,SCARED);
     }
 
-    public void FilterSleepy()
+    public void FilterSleepy(List<APIModelMovie> mMovielist)
     {
         String FILE_NAME = "sleepy.txt";
         int[] x = GetMoodIDs((FILE_NAME));
@@ -338,6 +346,39 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     fis.close();
                     Log.v("fileRead", this.outputString);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void LoadMoodCurrent() {
+        FileInputStream fis = null;
+
+        try {
+            fis = openFileInput("current.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                sb.append(text).append("\n");
+            }
+
+            this.currentMood = sb.toString();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null){
+                try {
+                    fis.close();
+                    Log.v("fileRead", this.currentMood);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
